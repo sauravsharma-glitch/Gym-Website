@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- In your <head> section, add this -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23e30613'>🏋️</text></svg>">
+    <title>IRON VALLEY · premium gym</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #0b0f17;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* navigation */
+        nav {
+            background: rgba(10, 15, 28, 0.96);
+            backdrop-filter: blur(12px);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #e30613;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(145deg, #e30613, #ff5e3a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            background: none;
+            -webkit-text-fill-color: #e30613;
+            margin-right: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+            padding: 6px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: #e30613;
+            border-bottom-color: #e30613;
+        }
+
+        .nav-links .wa-nav {
+            background: #25D366;
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            border-bottom: none;
+        }
+
+        .nav-links .wa-nav:hover {
+            background: #128C7E;
+            color: white;
+        }
+
+        /* hero */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0b0f17 0%, #1a1f30 100%);
+            background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            padding: 40px 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #e30613;
+            border-bottom: 4px solid #e30613;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #dddddd;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            background: #e30613;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: #b00410;
+            transform: scale(1.02);
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-wa:hover {
+            background: #128C7E;
+        }
+
+        /* section general */
+        .section-pad {
+            padding: 90px 0 60px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #e30613;
+            border-radius: 4px;
+        }
+
+        /* features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: #171d2b;
+            padding: 40px 25px;
+            border-radius: 24px;
+            text-align: center;
+            border: 1px solid #2b3243;
+            transition: 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: #e30613;
+            transform: translateY(-5px);
+        }
+
+        .feature-card i {
+            font-size: 48px;
+            color: #e30613;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #aaa;
+        }
+
+        /* pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background: #171d2b;
+            border-radius: 30px;
+            padding: 40px 25px;
+            text-align: center;
+            border: 1px solid #2b3243;
+            position: relative;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid #e30613;
+            transform: scale(1.02);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 16px;
+            right: -28px;
+            background: #e30613;
+            color: white;
+            padding: 6px 35px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .price {
+            font-size: 44px;
+            font-weight: 800;
+            color: #e30613;
+            margin: 20px 0;
+        }
+
+        .price span {
+            font-size: 16px;
+            color: #aaa;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .pricing-card ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #252c3b;
+        }
+
+        .pricing-card ul li i {
+            color: #e30613;
+            margin-right: 8px;
+        }
+
+        .btn-plan {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid #e30613;
+            color: white;
+            padding: 12px 40px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn-plan:hover {
+            background: #e30613;
+        }
+
+        /* trainers */
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .trainer-card {
+            background: #171d2b;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #2b3243;
+        }
+
+        .trainer-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .trainer-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .trainer-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .trainer-info p {
+            color: #e30613;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .trainer-social a {
+            color: #aaa;
+            margin: 0 8px;
+            font-size: 1.2rem;
+        }
+
+        .trainer-social a:hover {
+            color: #e30613;
+        }
+
+        /* contact / enquiry form */
+        .contact-premium {
+            background: #171d2b;
+            border-radius: 40px;
+            padding: 60px 50px;
+            margin-top: 40px;
+        }
+
+        .contact-flex {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+        }
+
+        .info-col h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .info-col p {
+            color: #b0b8c5;
+            margin-bottom: 30px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .contact-detail i {
+            width: 50px;
+            height: 50px;
+            background: #252d3d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e30613;
+            font-size: 1.3rem;
+        }
+
+        .form-col .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-col input, .form-col select, .form-col textarea {
+            width: 100%;
+            padding: 15px 18px;
+            background: #252d3d;
+            border: 1px solid #353e52;
+            border-radius: 14px;
+            color: white;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .form-col input:focus, .form-col select:focus, .form-col textarea:focus {
+            border-color: #e30613;
+            outline: none;
+        }
+
+        .form-col textarea {
+            resize: vertical;
+        }
+
+        .btn-submit-wa {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 16px;
+            width: 100%;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-submit-wa:hover {
+            background: #128C7E;
+        }
+
+        /* schedule responsive */
+        .schedule-wrap {
+            overflow-x: auto;
+            margin: 60px 0;
+            background: #171d2b;
+            border-radius: 24px;
+            padding: 5px;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        .schedule-table th {
+            background: #e30613;
+            padding: 16px;
+            font-weight: 600;
+        }
+
+        .schedule-table td {
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid #2b3243;
+        }
+
+        .schedule-table td i {
+            color: #e30613;
+            margin-right: 5px;
+        }
+
+        /* FOOTER — includes privacy, cookies, terms all visible */
+        footer {
+            background: #070b14;
+            padding: 70px 0 20px;
+            border-top: 1px solid #202636;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #e30613;
+        }
+
+        .footer-col p, .footer-col a {
+            color: #a0a8b9;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: #e30613;
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: #a0a8b9;
+            font-size: 1.4rem;
+            margin-right: 18px;
+        }
+
+        .social-links a:hover {
+            color: #e30613;
+        }
+
+        /* privacy & cookies row */
+        .legal-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0 15px;
+            border-top: 1px solid #202636;
+            margin-top: 20px;
+            color: #80889e;
+            font-size: 0.9rem;
+        }
+
+        .legal-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .legal-links a {
+            color: #a0a8b9;
+            text-decoration: none;
+        }
+
+        .legal-links a:hover {
+            color: #e30613;
+        }
+
+        .cookie-badge {
+            background: #1e2537;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+        }
+
+        .cookie-badge i {
+            color: #e30613;
+            margin-right: 6px;
+        }
+
+        /* cookie consent simulation (non‑intrusive) */
+        .cookie-consent-bar {
+            background: #131a28;
+            border-radius: 60px;
+            padding: 10px 20px 10px 30px;
+            margin: 20px 0 0;
+            display: inline-flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #2d374b;
+        }
+
+        .cookie-consent-bar span {
+            color: #cfd9e6;
+        }
+
+        .cookie-btn {
+            background: #252f41;
+            border: none;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .cookie-btn.accept {
+            background: #e30613;
+        }
+
+        .cookie-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* whatsapp float */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            z-index: 99;
+        }
+
+        @media (max-width: 800px) {
+            .contact-flex {
+                grid-template-columns: 1fr;
+            }
+            .nav-wrapper {
+                flex-direction: column;
+            }
+            .legal-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-wrapper">
+            <div class="logo"><i class="fas fa-dumbbell"></i> IRON VALLEY</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#trainers">Trainers</a>
+                <a href="#schedule">Schedule</a>
+                <a href="#contact">Contact</a>
+                <a href="https://wa.me/919027038209?text=Hi%20Iron%20Valley%2C%20I'm%20interested" class="wa-nav" target="_blank"><i class="fab fa-whatsapp"></i> DM</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- hero -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>SCULPT YOUR <span>EDGE</span><br>DOMINATE YOUR DAY</h1>
+            <p>Elite gym with personalised coaching, recovery zone, and 24/7 access. Your journey starts now.</p>
+            <div class="btn-group">
+                <a href="#contact" class="btn-primary">Join today</a>
+                <a href="https://wa.me/919027038209?text=Hi%2C%20I%20saw%20Iron%20Valley%20website%20and%20want%20to%20know%20more" class="btn-wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- features -->
+    <section class="container section-pad" id="features">
+        <h2 class="section-title">WHY IRON VALLEY</h2>
+        <div class="features-grid">
+            <div class="feature-card"><i class="fas fa-dumbbell"></i><h3>Pro equipment</h3><p>Technogym, Hammer Strength & free weights zone</p></div>
+            <div class="feature-card"><i class="fas fa-user-ninja"></i><h3>Elite coaches</h3><p>certified, 10+ years experience, sport specialists</p></div>
+            <div class="feature-card"><i class="fas fa-clock"></i><h3>24/7 access</h3><p>train anytime, smart entry for members</p></div>
+            <div class="feature-card"><i class="fas fa-heart-pulse"></i><h3>Recovery area</h3><p>sauna, cryo & massage guns included</p></div>
+        </div>
+    </section>
+
+    <!-- pricing -->
+    <section class="container section-pad" id="pricing">
+        <h2 class="section-title">MEMBERSHIP PLANS</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card"><h3>ESSENTIAL</h3><div class="price">₹2,499<span>/mo</span></div><ul><li><i class="fas fa-check"></i> Gym access 6am-10pm</li><li><i class="fas fa-check"></i> Locker + changing</li><li><i class="fas fa-check"></i> 1 free session</li><li><i class="fas fa-times"></i> Group classes</li></ul><a href="#contact" class="btn-plan">select</a></div>
+            <div class="pricing-card popular"><div class="popular-badge">BESTSELLER</div><h3>PRO</h3><div class="price">₹4,999<span>/mo</span></div><ul><li><i class="fas fa-check"></i> 24/7 access</li><li><i class="fas fa-check"></i> All group classes</li><li><i class="fas fa-check"></i> 4 PT sessions/mo</li><li><i class="fas fa-check"></i> Diet starter plan</li></ul><a href="#contact" class="btn-plan">select</a></div>
+            <div class="pricing-card"><h3>ELITE</h3><div class="price">₹7,999<span>/mo</span></div><ul><li><i class="fas fa-check"></i> Unlimited PT</li><li><i class="fas fa-check"></i> Recovery zone</li><li><i class="fas fa-check"></i> Nutrition tracking</li><li><i class="fas fa-check"></i> Guest passes</li></ul><a href="#contact" class="btn-plan">select</a></div>
+        </div>
+    </section>
+
+    <!-- trainers -->
+    <section class="container section-pad" id="trainers">
+        <h2 class="section-title">EXPERT TRAINERS</h2>
+        <div class="trainers-grid">
+            <div class="trainer-card"><img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=500&auto=format" alt="trainer"><div class="trainer-info"><h4>Alex Cross</h4><p>strength & conditioning</p><div class="trainer-social"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div></div>
+            <div class="trainer-card"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&auto=format" alt="trainer"><div class="trainer-info"><h4>Maya Kapoor</h4><p>yoga & mobility</p><div class="trainer-social"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div></div>
+            <div class="trainer-card"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500&auto=format" alt="trainer"><div class="trainer-info"><h4>Rohan Seth</h4><p>crossfit & HIIT</p><div class="trainer-social"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div></div>
+            <div class="trainer-card"><img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=500&auto=format" alt="trainer"><div class="trainer-info"><h4>Priya Mehta</h4><p>nutrition & wellness</p><div class="trainer-social"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div></div>
+        </div>
+    </section>
+
+    <!-- schedule table -->
+    <section class="container" id="schedule">
+        <h2 class="section-title">CLASS TIMETABLE</h2>
+        <div class="schedule-wrap">
+            <table class="schedule-table">
+                <tr><th>TIME</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr>
+                <tr><td><i class="fas fa-clock"></i> 6:00</td><td>HIIT</td><td>Yoga</td><td>Strength</td><td>Cardio</td><td>CrossFit</td><td>Zumba</td></tr>
+                <tr><td><i class="fas fa-clock"></i> 9:00</td><td>Yoga</td><td>Pilates</td><td>HIIT</td><td>Strength</td><td>Yoga</td><td>HIIT</td></tr>
+                <tr><td><i class="fas fa-clock"></i> 17:00</td><td>CrossFit</td><td>HIIT</td><td>Boxing</td><td>Yoga</td><td>Strength</td><td>Recovery</td></tr>
+                <tr><td><i class="fas fa-clock"></i> 19:00</td><td>Zumba</td><td>Strength</td><td>Yoga</td><td>HIIT</td><td>Pilates</td><td>–</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- CONTACT / ENQUIRY FORM (all details to whatsapp) -->
+    <section class="container section-pad" id="contact">
+        <div class="contact-premium">
+            <h2 class="section-title" style="margin-bottom:40px;">REQUEST CALLBACK</h2>
+            <div class="contact-flex">
+                <div class="info-col">
+                    <h3>Let’s talk about your goals</h3>
+                    <p>Drop your details – we’ll reply on WhatsApp within 15 minutes. All fields help us customise your plan.</p>
+                    <div class="contact-detail"><i class="fas fa-map-pin"></i><div>Bandra East, Mumbai – 400051</div></div>
+                    <div class="contact-detail"><i class="fas fa-phone-alt"></i><div>+91 90270 38209</div></div>
+                    <div class="contact-detail"><i class="fab fa-whatsapp"></i><div>same number · instant reply</div></div>
+                    <div class="contact-detail"><i class="fas fa-clock"></i><div>Mon-Sun 5am – 11pm</div></div>
+                    <!-- cookie consent mock (friendly) -->
+                    <div class="cookie-consent-bar">
+                        <span><i class="fas fa-cookie-bite"></i> we respect your privacy</span>
+                        <button class="cookie-btn accept">accept</button>
+                        <button class="cookie-btn">preferences</button>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <form id="gymForm" onsubmit="sendToWhatsApp(event)">
+                        <div class="form-row">
+                            <input type="text" id="firstName" placeholder="First name *" required>
+                            <input type="text" id="lastName" placeholder="Last name *" required>
+                        </div>
+                        <input type="email" id="email" placeholder="Email *" required>
+                        <div class="form-row">
+                            <input type="tel" id="phone" placeholder="Phone *" required value="+91">
+                            <input type="number" id="age" placeholder="Age *" min="15" required>
+                        </div>
+                        <div class="form-row">
+                            <select id="gender" required><option value="">Gender</option><option>Male</option><option>Female</option><option>Other</option></select>
+                            <select id="goal" required><option value="">Main goal</option><option>Weight loss</option><option>Muscle gain</option><option>Toning</option><option>Strength</option></select>
+                        </div>
+                        <div class="form-row">
+                            <select id="fitnessLevel"><option value="">Fitness level</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
+                            <select id="membershipPlan"><option value="">Interested plan</option><option>Essential ₹2499</option><option>Pro ₹4999</option><option>Elite ₹7999</option></select>
+                        </div>
+                        <select id="preferredTime"><option>Preferred time</option><option>6am-9am</option><option>9am-12pm</option><option>4pm-8pm</option><option>8pm-11pm</option></select>
+                        <textarea id="medical" rows="2" placeholder="Injuries / medical (optional)"></textarea>
+                        <textarea id="message" rows="2" placeholder="How can we help?"></textarea>
+                        <button type="submit" class="btn-submit-wa"><i class="fab fa-whatsapp"></i> Send details on WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (contains all privacy, cookies, terms, policies) -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4><i class="fas fa-dumbbell"></i> IRON VALLEY</h4>
+                    <p>Premium fitness club since 2018. 2000+ transformed members.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick links</h4>
+                    <ul><li><a href="#home">Home</a></li><li><a href="#features">Features</a></li><li><a href="#pricing">Plans</a></li><li><a href="#trainers">Trainers</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul><li><a href="#">FAQs</a></li><li><a href="#">Contact</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li></ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Policies</h4>
+                    <ul><li><a href="#" id="privacyLink">Privacy policy</a></li><li><a href="#" id="termsLink">Terms of use</a></li><li><a href="#" id="cookieLink">Cookie policy</a></li><li><a href="#" id="gdprLink">GDPR</a></li></ul>
+                </div>
+            </div>
+
+            <!-- legal row with all cookies & privacy links -->
+            <div class="legal-row">
+                <div class="legal-links">
+                    <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a>
+                    <a href="#"><i class="fas fa-file-contract"></i> Terms</a>
+                    <a href="#"><i class="fas fa-cookie"></i> Cookies</a>
+                    <a href="#"><i class="fas fa-user-lock"></i> Data policy</a>
+                    <a href="#"><i class="fas fa-cc-visa"></i> Billing terms</a>
+                </div>
+                <div class="cookie-badge">
+                    <i class="fas fa-cookie-bite"></i> This site uses essential cookies.
+                </div>
+                <div>© 2025 Iron Valley. All rights reserved.</div>
+            </div>
+            <!-- additional explicit notice -->
+            <div style="text-align: center; margin-top: 25px; color: #4e5770; font-size: 0.8rem; border-top: 1px dashed #293040; padding-top: 20px;">
+                <i class="fas fa-balance-scale"></i> By using this site you agree to our <a href="privacy.html" style="color:#e30613;">Privacy</a> and <a href="Cookie policy.html" style="color:#e30613;">Cookie Policy</a> and <a href="terms.html" style="color:#e30613;">Terms of Use </a>. We never share your data.
+            </div>
+        </div>
+    </footer>
+
+    <!-- whatsapp float -->
+    <a href="https://wa.me/919027038209?text=Hi%2C%20I'm%20on%20Iron%20Valley%20website" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+            const fName = document.getElementById('firstName')?.value || '';
+            const lName = document.getElementById('lastName')?.value || '';
+            const email = document.getElementById('email')?.value || '';
+            const phone = document.getElementById('phone')?.value || '';
+            const age = document.getElementById('age')?.value || '';
+            const gender = document.getElementById('gender')?.value || '';
+            const goal = document.getElementById('goal')?.value || '';
+            const level = document.getElementById('fitnessLevel')?.value || '';
+            const plan = document.getElementById('membershipPlan')?.value || '';
+            const time = document.getElementById('preferredTime')?.value || '';
+            const medical = document.getElementById('medical')?.value || 'none';
+            const msg = document.getElementById('message')?.value || 'none';
+
+            const whatsappMsg = `*IRON VALLEY enquiry*%0A%0A*Name*: ${fName} ${lName}%0A*Email*: ${email}%0A*Phone*: ${phone}%0A*Age*: ${age}%0A*Gender*: ${gender}%0A*Goal*: ${goal}%0A*Fitness level*: ${level}%0A*Plan*: ${plan}%0A*Preferred time*: ${time}%0A*Medical*: ${medical}%0A*Message*: ${msg}%0A%0A_Sent from website_`;
+            window.open(`https://wa.me/919027038209?text=${whatsappMsg}`, '_blank');
+        }
+    </script>
+    <!-- small script for policy popup simulation (just anchor) -->
+    <script>
+        document.querySelectorAll('#privacyLink, #termsLink, #cookieLink, #gdprLink, .legal-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('📄 Full policy document would open. (This is a demo — integrate real PDF/URL)');
+            });
+        });
+    </script>
+</body>
+</html>
